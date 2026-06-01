@@ -5,6 +5,7 @@
 package br.edu.ifpar.tsi3.tsfy.dominio;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  *
@@ -64,5 +65,34 @@ public class Playlist {
         this.musicas.add(musica);
     }
     
+    
     //TODO: e os demais métodos de manipular músicas da playlist.
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.dono);
+        hash = 67 * hash + Objects.hashCode(this.nome);
+        hash = 67 * hash + Objects.hashCode(this.descricao);
+        hash = 67 * hash + Objects.hashCode(this.musicas);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Playlist other = (Playlist) obj;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        return Objects.equals(this.descricao, other.descricao);
+    }
 }

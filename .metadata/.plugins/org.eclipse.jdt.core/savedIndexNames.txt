@@ -1,0 +1,2 @@
+INDEX VERSION 1.134+/home/leticia/Programação/IFRN/Analise_e_Projeto_de_Sistemas_Web/Tsfy/.metadata/.plugins/org.eclipse.jdt.core
+4254591445.index
