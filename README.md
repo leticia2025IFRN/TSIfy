@@ -43,14 +43,39 @@ Este projeto é para a atividade de Análise e Projetos de Sistemas Web, com o o
 │       └── java
 └── target
     ├── classes
+    │   └── br
+    │       └── edu
+    │           └── ifpar
+    │               └── tsi3
+    │                   └── tsfy
+    │                       ├── controladores
+    │                       │   ├── MusicaControlador.class
+    │                       │   ├── PlaylistControlador.class
+    │                       │   └── UsuarioControlador.class
+    │                       ├── dominio
+    │                       │   ├── Musica.class
+    │                       │   ├── Playlist.class
+    │                       │   └── Usuario.class
+    │                       ├── main
+    │                       │   └── Main.class
+    │                       ├── servicos
+    │                       │   ├── MusicaServico.class
+    │                       │   ├── PlaylistServico.class
+    │                       │   └── UsuarioServico.class
+    │                       └── UI
+    │                           ├── fachada
+    │                           │   └── FachadaFrontend.class
+    │                           ├── TsfyUI.class
+    │                           └── TsfyUIDesktop.class
     ├── generated-sources
     │   └── annotations
-    └── maven-status
-        └── maven-compiler-plugin
-            └── compile
-                └── default-compile
-                    ├── createdFiles.lst
-                    └── inputFiles.lst
+    ├── maven-status
+    │   └── maven-compiler-plugin
+    │       └── compile
+    │           └── default-compile
+    │               ├── createdFiles.lst
+    │               └── inputFiles.lst
+    └── test-classes
 ```
 
 ### Dependências
