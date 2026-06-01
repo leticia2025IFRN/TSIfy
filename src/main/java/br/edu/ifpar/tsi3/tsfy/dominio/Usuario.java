@@ -5,17 +5,18 @@
 package br.edu.ifpar.tsi3.tsfy.dominio;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  *
  * @author 1071759
  */
 public class Usuario {
-    
+
     private String cpf;
     private String nome;
     private String senha;
-    
+
     private ArrayList<Playlist> playlists;
 
     public ArrayList<Playlist> getPlaylists() {
@@ -24,7 +25,7 @@ public class Usuario {
 
     public void setPlaylists(ArrayList<Playlist> playlists) {
         this.playlists = playlists;
-    }  
+    }
 
     public String getCpf() {
         return cpf;
@@ -55,6 +56,20 @@ public class Usuario {
         this.nome = nome;
         this.senha = senha;
     }
-    
-    
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cpf, senha);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        Usuario other = (Usuario) obj;
+        return (
+            Objects.equals(cpf, other.cpf) && Objects.equals(senha, other.senha)
+        );
+    }
 }

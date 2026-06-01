@@ -5,22 +5,23 @@
 package br.edu.ifpar.tsi3.tsfy.dominio;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  *
  * @author 1071759
  */
 public class Playlist {
-    
+
     private Usuario dono;
-    
+
     private String nome;
-    
+
     private String descricao;
-    
+
     private ArrayList<Musica> musicas;
-    
-    public Playlist() { }
+
+    public Playlist() {}
 
     public Playlist(Usuario dono, String nome, String descricao) {
         this.dono = dono;
@@ -59,10 +60,22 @@ public class Playlist {
     public void setMusicas(ArrayList<Musica> musicas) {
         this.musicas = musicas;
     }
-    
-    public void adicionarAPlaylist(Musica musica){
+
+    public void adicionarAPlaylist(Musica musica) {
         this.musicas.add(musica);
     }
-    
-    //TODO: e os demais métodos de manipular músicas da playlist.
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        Playlist other = (Playlist) obj;
+        return Objects.equals(nome, other.nome);
+    }
 }

@@ -4,30 +4,37 @@
  */
 package br.edu.ifpar.tsi3.tsfy.dominio;
 
+import java.util.Objects;
+
 /**
  *
  * @author 1071759
  */
 public class Musica {
-    
+
     private String titulo;
     private String compositor;
     private String interprete;
     private double duracao;
 
-    public Musica(String titulo, String compositor, String interprete, double duracao) {
+    public Musica(
+        String titulo,
+        String compositor,
+        String interprete,
+        double duracao
+    ) {
         this.titulo = titulo;
         this.compositor = compositor;
         this.interprete = interprete;
         this.duracao = duracao;
     }
-    
+
     public Musica(String titulo, String compositor) {
         this.titulo = titulo;
         this.compositor = compositor;
     }
-    
-    public Musica(){
+
+    public Musica() {
         //Contrutor padrão
     }
 
@@ -62,5 +69,24 @@ public class Musica {
     public void setDuracao(double duracao) {
         this.duracao = duracao;
     }
-    
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(compositor, duracao, interprete, titulo);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        Musica other = (Musica) obj;
+        return (
+            Objects.equals(compositor, other.compositor) &&
+            Double.doubleToLongBits(duracao) ==
+                Double.doubleToLongBits(other.duracao) &&
+            Objects.equals(interprete, other.interprete) &&
+            Objects.equals(titulo, other.titulo)
+        );
+    }
 }

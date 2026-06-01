@@ -5,6 +5,9 @@
 package br.edu.ifpar.tsi3.tsfy.UI;
 
 import br.edu.ifpar.tsi3.tsfy.UI.fachada.FachadaFrontend;
+import br.edu.ifpar.tsi3.tsfy.dominio.Musica;
+import br.edu.ifpar.tsi3.tsfy.dominio.Playlist;
+import br.edu.ifpar.tsi3.tsfy.dominio.Usuario;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,21 +18,16 @@ import java.util.Scanner;
 public class TsfyUI {
 
     private final Scanner sc = new Scanner(System.in);
-    private ArrayList<Usuario> todosOsPerfis = new ArrayList<>();
-    
-    private Playlist minhasPlaylists[] = new Playlist[10];
-    private int limitadorPlaylist = 0;
-    
     private FachadaFrontend fachada = new FachadaFrontend();
-    
+    private Usuario usuarioLogado = null;
+
     public void rodar() {
-        
         int op;
-        
+
         do {
             menuDeLogin();
             op = Integer.parseInt(sc.nextLine());
-            
+
             switch (op) {
                 case 1:
                     criarNovoUsuario();
@@ -37,20 +35,15 @@ public class TsfyUI {
                 case 2:
                     autenticar();
                     break;
-                case 3:
-                    listarMusicas();
-                    break;
                 default:
                     throw new AssertionError();
             }
-            
-        } while (op != 0);
-        
-        
+        } while (usuarioLogado == null);
+
         do {
             menu();
             op = Integer.parseInt(sc.nextLine());
-            
+
             switch (op) {
                 case 1:
                     criarMusica();
@@ -58,25 +51,43 @@ public class TsfyUI {
                 case 2:
                     editarMusica();
                     break;
-                    
                 case 3:
                     listarMusicas();
                     break;
                 case 4:
                     buscarMusicaPorID();
-                    break;   
+                    break;
                 case 5:
                     removerMusica();
-                    break;  
+                    break;
+                case 6:
+                    criarPlaylist();
+                    break;
+                case 7:
+                    listarMusicasPlaylist();
+                    break;
+                case 8:
+                    removerMusicaPlaylist();
+                    break;
+                case 9:
+                    editarPlaylist();
+                    break;
+                case 10:
+                    listarPlaylists();
+                    break;
+                case 11:
+                    removerPlaylist();
+                    break;
+                case 12:
+                    adicionarMusicaPlaylist();
+                    break;
                 default:
                     throw new AssertionError();
             }
-            
         } while (op != 0);
-        
     }
-    
-    public void menu(){
+
+    public void menu() {
         //Favoritar Musica
         System.out.println("------ Menu de Operacoes ------");
         System.out.println("1 - Criar musica");
@@ -84,6 +95,13 @@ public class TsfyUI {
         System.out.println("3 - Listar musicas");
         System.out.println("4 - Buscar musica");
         System.out.println("5 - Remover musica");
+        System.out.println("6 - Criar playlist");
+        System.out.println("7 - Listar Musicas de uma playlist");
+        System.out.println("8 - Remover uma musica de uma playlist");
+        System.out.println("9 - Editar playlist");
+        System.out.println("10 - Listar Playlists");
+        System.out.println("11 - Remover Playlists");
+        System.out.println("12 - Adicionar musica a uma Playlist");
         System.out.println("0 - Sair");
     }
 
@@ -96,149 +114,274 @@ public class TsfyUI {
         String interprete = sc.nextLine();
         System.out.println("Qual é a duracao da musica?");
         Double duracao = Double.parseDouble(sc.nextLine());
-        
-        boolean sucesso = this.fachada.registrarMusica (titulo, compositor, interprete, duracao);
-        
-        if (sucesso){
-            System.out.println("Música adicionado com sucesso à base de dados.");
+
+        boolean sucesso = this.fachada.registrarMusica(
+            titulo,
+            compositor,
+            interprete,
+            duracao
+        );
+
+        if (sucesso) {
+            System.out.println(
+                "Música adicionado com sucesso à base de dados."
+            );
         } else {
-            // Quando o cadastro deu errado.
+            System.out.println("Música já existente!");
         }
     }
-    
-//    private void criarMusica() {
-//        System.out.println("Qual é o título da musica?");
-//        String titulo = sc.nextLine();
-//        System.out.println("Qual é o compositor da musica?");
-//        String compositor = sc.nextLine();
-//        System.out.println("Qual é o interprete da musica?");
-//        String interprete = sc.nextLine();
-//        System.out.println("Qual é a duracao da musica?");
-//        Double duracao = Double.parseDouble(sc.nextLine());
-//        Musica musica = new Musica(titulo, compositor, interprete, duracao);
-//        todasAsMusicas.add(musica);
-//    }
 
     private void editarMusica() {
         System.out.println("Esta é meu banco de dados de músicas: ");
-        for (int i = 0; i < this.todasAsMusicas.size(); i++){
-            System.out.println("[" + i + "] " + this.todasAsMusicas.get(i).getTitulo() + "(intérprete: " + this.todasAsMusicas.get(i).getInterprete() + ")");
-        }
-        
-        System.out.println("Informe qual é o ID da música que você deseja editar: ");
+        fachada.listarTodasMusicas();
+
+        System.out.println(
+            "Informe qual é o ID da música que você deseja editar: "
+        );
         int id = Integer.parseInt(sc.nextLine());
-        
+
         System.out.println("Qual é o título da musica?");
         String titulo = sc.nextLine();
-        this.todasAsMusicas.get(id).setTitulo(titulo);
         System.out.println("Qual é o compositor da musica?");
         String compositor = sc.nextLine();
-        this.todasAsMusicas.get(id).setCompositor(compositor);
         System.out.println("Qual é o interprete da musica?");
         String interprete = sc.nextLine();
-        this.todasAsMusicas.get(id).setInterprete(interprete);
         System.out.println("Qual é a duracao da musica?");
         Double duracao = Double.parseDouble(sc.nextLine());
-        this.todasAsMusicas.get(id).setDuracao(duracao);
-        
-        System.out.println("Musica editada com sucesso.");
+
+        boolean sucesso = fachada.editarMusica(
+            id,
+            titulo,
+            compositor,
+            interprete,
+            duracao
+        );
+
+        if (sucesso) {
+            System.out.println("Musica editada com sucesso.");
+        } else {
+            System.out.println("Falha ao editar a musica.");
+        }
     }
 
     private void listarMusicas() {
-        for (Musica musica: this.todasAsMusicas) {
-            System.out.println(musica.getTitulo() + "(intérprete: " + musica.getInterprete() + ")");
+        ArrayList<Musica> listaDeMusicas = fachada.listarTodasMusicas();
+
+        for (int i = 0; i < listaDeMusicas.size(); i++) {
+            String musica = "[%d] - %s";
+            System.out.println(
+                String.format(musica, i, listaDeMusicas.get(i).getTitulo())
+            );
         }
-                
     }
 
     private void buscarMusicaPorID() {
-        System.out.println("Informe qual é o ID da música que você deseja buscar: ");
+        System.out.println(
+            "Informe qual é o ID da música que você deseja buscar: "
+        );
         int id = Integer.parseInt(sc.nextLine());
-        
-        System.out.println("Título: " + this.todasAsMusicas.get(id).getTitulo());
-        System.out.println("Compositor: " + this.todasAsMusicas.get(id).getCompositor());
-        System.out.println("Interprete: " + this.todasAsMusicas.get(id).getInterprete());
-        System.out.println("Duracao: " + this.todasAsMusicas.get(id).getDuracao());
+        Musica sucesso = fachada.buscarPorId(id);
+
+        if (sucesso != null) {
+            System.out.println(
+                "Musica Encontrada." +
+                    sucesso.getTitulo() +
+                    "-" +
+                    sucesso.getCompositor()
+            );
+        } else {
+            System.out.println("Falha ao buscar a musica.");
+        }
     }
 
     private void removerMusica() {
         System.out.println("Esta é meu banco de dados de músicas: ");
-        for (int i = 0; i < this.todasAsMusicas.size(); i++){
-            System.out.println("[" + i + "] " + this.todasAsMusicas.get(i).getTitulo() + "(intérprete: " + this.todasAsMusicas.get(i).getInterprete() + ")");
-        }
-        
-        System.out.println("Informe qual é o ID da música que você deseja remover: ");
+        fachada.listarTodasMusicas();
+
+        System.out.println(
+            "Informe qual é o ID da música que você deseja remover: "
+        );
         int id = Integer.parseInt(sc.nextLine());
-        
-        this.todasAsMusicas.remove(id);
-    }
-    
-    
-    private boolean criarPlaylist(Usuario dono, String nome, String descricao){
-        Playlist novaPlaylist = new Playlist(dono, nome, descricao);
-        
-        if (validarPlaylist(nome)){
-            // Solicitar um novo nome de playlist para o usuario
-            return false;
+
+        boolean sucesso = fachada.revomerMusica(id);
+
+        if (sucesso) {
+            System.out.println("Musica removida com sucesso.");
         } else {
-            this.registrarPlaylist(novaPlaylist);
-            return true;
+            System.out.println("Falha ao remover a musica.");
         }
     }
 
-    private void registrarPlaylist(Playlist novaPlaylist){
-        if(this.minhasPlaylists.length == this.limitadorPlaylist){
-            Playlist playlists[] = new Playlist[this.limitadorPlaylist+10];
-            
-            for (int i = 0; i < this.minhasPlaylists.length; i++){
-                playlists[i] = this.minhasPlaylists[i];
-            }
-            
-            this.minhasPlaylists = playlists;
-        } 
-        
-        this.minhasPlaylists[limitadorPlaylist++] = novaPlaylist;
-        
-        
-    }
-
-    private boolean validarPlaylist(String nome) {
-        for (int i = 0; i < this.minhasPlaylists.length; i++){
-                if (this.minhasPlaylists[i].getNome().equals(nome))
-                    return true;
-        }
-        return false;
-    }
-
-    private void menuDeLogin() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void criarNovoUsuario() {
-        // Não estou verificando se tenho mais do que um usuário com o mesmo cpf
-        System.out.println("Informe seu nome:");
+    private boolean criarPlaylist() {
+        System.out.println("Informe seu nome da playlist:");
         String nome = sc.nextLine();
-        System.out.println("Informe seu cpf: ");
-        String cpf = sc.nextLine();
-        System.out.println("Informe sua senha: ");
-        String senha = sc.nextLine();
-        
-        Usuario novo = new Usuario(cpf, nome, senha);
-        this.todosOsPerfis.add(novo);
+        System.out.println("Informe a descrição da playlist: ");
+        String descricao = sc.nextLine();
+
+        boolean sucesso = fachada.criarPlaylist(usuarioLogado, nome, descricao);
+
+        if (sucesso) {
+            System.out.println("Playlist Criada com sucesso!");
+        } else {
+            System.out.println("Playlist Ja existente!");
+        }
     }
 
-    private Usuario autenticar() {
-        System.out.println("Informe seu cpf: ");
-        String cpf = sc.nextLine();
-        System.out.println("Informe sua senha: ");
-        String senha = sc.nextLine();
-        
-        for (int i = 0; i < this.todosOsPerfis.size(); i++){
-            if (this.todosOsPerfis.get(i).getCpf().equals(cpf) && this.todosOsPerfis.get(i).getSenha().equals(senha)){
-                return this.todosOsPerfis.get(i);
-            }
+    private void listarPlaylists() {
+        ArrayList<Playlist> listaDePlaylists = fachada.listarPlaylists();
+        for (int i = 0; i < listaDePlaylists.size(); i++) {
+            String playlist = "[%d] - %s, %s";
+            System.out.println(
+                String.format(
+                    playlist,
+                    i,
+                    listaDePlaylists.get(i).getNome(),
+                    listaDePlaylists.get(i).getDescricao()
+                )
+            );
         }
-        return null;
     }
-    
+
+    private void adicionarMusicaPlaylist() {
+        System.out.println("Essas são suas playlists: ");
+        listarPlaylists();
+
+        System.out.println("Informe o id da playlist: ");
+        int idPlaylist = sc.nextInt();
+
+        System.out.println("Essas são suas musicas: ");
+        listarMusicas();
+        System.out.println("Informe o id da musica: ");
+        int idMusica = sc.nextInt();
+
+        boolean sucesso = fachada.adicionarMusicaPlaylist(idPlaylist, idMusica);
+
+        if (sucesso) {
+            System.out.println("Musica Adicionada com sucesso!");
+        } else {
+            System.out.println("Falha ao adicinar a musica!");
+        }
+    }
+
+    private void removerMusicaPlaylist() {
+        System.out.println("Essas são suas playlists: ");
+        listarPlaylists();
+
+        System.out.println("Informe o id da playlist: ");
+        int idDaPlaylist = sc.nextInt();
+
+        System.out.println("Essas são suas musicas: ");
+        listarMusicas();
+        System.out.println("Informe o id da musica que deseja remover: ");
+        int idMusica = sc.nextInt();
+
+        boolean sucesso = fachada.removerMusicaPlaylist(idDaPlaylist, idMusica);
+
+        if (sucesso) {
+            System.out.println("Musica Removida com sucesso!");
+        } else {
+            System.out.println("Falha ao Remover a musica!");
+        }
+    }
+
+    private void listarMusicasPlaylist() {
+        System.out.println("Essas são suas playlists: ");
+        listarPlaylists();
+
+        System.out.println(
+            "Informe o id da playlist que deseja exibir as musicas: "
+        );
+        int idDaPlaylist = sc.nextInt();
+
+        ArrayList<Musica> listaMusicasPlaylist = fachada.listarMusicasPlaylist(
+            idDaPlaylist
+        );
+
+        if (listaMusicasPlaylist != null) {
+            for (int i = 0; i < listaMusicasPlaylist.size(); i++) {
+                String musica = "[%d] - %s";
+                System.out.println(
+                    String.format(
+                        musica,
+                        i,
+                        listaMusicasPlaylist.get(i).getTitulo()
+                    )
+                );
+            }
+        } else {
+            System.out.println("Falha ao listar musicas da playlist");
+        }
+    }
+
+    private void removerPlaylist() {
+        System.out.println("Essas são suas playlists: ");
+        listarPlaylists();
+
+        System.out.println("Informe o id da playlist que deseja remover: ");
+        int idDaPlaylist = sc.nextInt();
+
+        boolean sucesso = fachada.removerPlaylist(idDaPlaylist);
+
+        if (sucesso) {
+            System.out.println("playlist removida com sucesso!");
+        } else {
+            System.out.println("Falha ao remover laylist");
+        }
+    }
+
+    private void editarPlaylist() {
+        System.out.println("Essas são suas playlists: ");
+        listarPlaylists();
+
+        System.out.println("Informe o id da playlist que deseja editar: ");
+        int idDaPlaylist = sc.nextInt();
+
+        System.out.println("Informe seu nome da playlist:");
+        String nome = sc.nextLine();
+        System.out.println("Informe a descrição da playlist: ");
+        String descricao = sc.nextLine();
+
+        boolean sucesso = fachada.editarPlaylist(idDaPlaylist, nome, descricao);
+
+        if (sucesso) {
+            System.out.println("playlist atualizada com sucesso!");
+        } else {
+            System.out.println("Falha ao atualizar laylist");
+        }
+    }
+
+    // TODO: realizar a implementação do Login
+    // private void menuDeLogin() {
+    //     throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    // }
+
+    // private void criarNovoUsuario() {
+    //     // Não estou verificando se tenho mais do que um usuário com o mesmo cpf
+    //     System.out.println("Informe seu nome:");
+    //     String nome = sc.nextLine();
+    //     System.out.println("Informe seu cpf: ");
+    //     String cpf = sc.nextLine();
+    //     System.out.println("Informe sua senha: ");
+    //     String senha = sc.nextLine();
+
+    //     Usuario novo = new Usuario(cpf, nome, senha);
+    //     this.todosOsPerfis.add(novo);
+    // }
+
+    // private Usuario autenticar() {
+    //     System.out.println("Informe seu cpf: ");
+    //     String cpf = sc.nextLine();
+    //     System.out.println("Informe sua senha: ");
+    //     String senha = sc.nextLine();
+
+    //     for (int i = 0; i < this.todosOsPerfis.size(); i++) {
+    //         if (
+    //             this.todosOsPerfis.get(i).getCpf().equals(cpf) &&
+    //             this.todosOsPerfis.get(i).getSenha().equals(senha)
+    //         ) {
+    //             return this.todosOsPerfis.get(i);
+    //         }
+    //     }
+    //     return null;
+    // }
 }
