@@ -7,8 +7,53 @@ Este projeto é para a atividade de Análise e Projetos de Sistemas Web, com o o
 **Data de entrega:** 01/06/2026 às 13:00
 **Aluno(a):** Letícia Geovana Lopes dos Santos
 
+## Scaffolding do Projeto
+
+```
+./Tsfy
+├── diagrams
+│   └── classes-uml.md
+├── LICENSE
+├── pom.xml
+├── README.md
+├── src
+│   ├── main
+│   │   └── java
+│   │       └── br
+│   │           └── edu
+│   │               └── ifpar
+│   │                   └── tsi3
+│   │                       └── tsfy
+│   │                           ├── controladores
+│   │                           │   ├── MusicaControlador.java
+│   │                           │   ├── PlaylistControlador.java
+│   │                           │   └── UsuarioControlador.java
+│   │                           ├── dominio
+│   │                           │   ├── Musica.java
+│   │                           │   ├── Playlist.java
+│   │                           │   └── Usuario.java
+│   │                           ├── main
+│   │                           │   └── Main.java
+│   │                           └── UI
+│   │                               ├── fachada
+│   │                               │   └── FachadaFrontend.java
+│   │                               ├── TsfyUIDesktop.java
+│   │                               └── TsfyUI.java
+│   └── test
+│       └── java
+└── target
+    ├── classes
+    ├── generated-sources
+    │   └── annotations
+    └── maven-status
+        └── maven-compiler-plugin
+            └── compile
+                └── default-compile
+                    ├── createdFiles.lst
+                    └── inputFiles.lst
+```
+
 ### Dependências
 
 > [!IMPORTANT]
 > - [ ] Realizar o mapeamento das depedências do projeto (se necessário).
-
