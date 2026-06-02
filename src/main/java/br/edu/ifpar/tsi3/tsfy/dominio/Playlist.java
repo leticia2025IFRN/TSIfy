@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Playlist {
-
+    
     private Usuario dono;
-
+    
     private String nome;
-
+    
     private String descricao;
-
+    
     private ArrayList<Musica> musicas;
-
-    public Playlist() {}
+    
+    public Playlist() { }
 
     public Playlist(Usuario dono, String nome, String descricao) {
         this.dono = dono;
@@ -52,8 +52,8 @@ public class Playlist {
     public void setMusicas(ArrayList<Musica> musicas) {
         this.musicas = musicas;
     }
-
-    public void adicionarPlaylist(Musica musica) {
+    
+    public void adicionarPlaylist(Musica musica){
         this.musicas.add(musica);
     }
 

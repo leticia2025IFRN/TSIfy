@@ -9,12 +9,7 @@ public class Musica {
     private String interprete;
     private double duracao;
 
-    public Musica(
-        String titulo,
-        String compositor,
-        String interprete,
-        double duracao
-    ) {
+    public Musica(String titulo, String compositor, String interprete, double duracao) {
         this.titulo = titulo;
         this.compositor = compositor;
         this.interprete = interprete;
@@ -87,6 +82,7 @@ public class Musica {
             return false;
         }
         final Musica other = (Musica) obj;
+
         if (
             Double.doubleToLongBits(this.duracao) !=
             Double.doubleToLongBits(other.duracao)

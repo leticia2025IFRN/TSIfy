@@ -1,9 +1,10 @@
 # Project Setup
 .classpath
-.settings/
 .metadata/
 .project
-src/test/*
+.settings/
+bin/
+src/test/
 
 # Compiled class file
 *.class

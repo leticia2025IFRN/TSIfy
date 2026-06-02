@@ -19,6 +19,7 @@ public class MusicaControlador {
         return true;
     }
 
+    @SuppressWarnings("unchecked")
     public ArrayList<Musica> listarTodasMusicas() {
         return (ArrayList<Musica>) todasAsMusicas.clone();
     }
