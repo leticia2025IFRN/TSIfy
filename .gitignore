@@ -1,4 +1,5 @@
 # Project Setup
+.settings/
 .metadata/
 .project
 src/test/*
