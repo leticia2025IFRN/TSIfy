@@ -89,6 +89,6 @@ Este projeto é para a atividade da disciplina de Análise e Projetos de Sistema
 
 ## Implementações futuras
 
-- [ ] Listar os usuários;
-- [ ] Implementar uma tabela CSV com informações prontas;
+- [X] Listar os usuários;
+- [ ] Implementar uma tabela CSV com informações pré-estabelecidas;
 - [ ] Criar código em Python para manipular a tabela CSV.
