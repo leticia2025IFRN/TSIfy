@@ -93,6 +93,7 @@ O(s) diagrama(s) do projeto se encontra(m) em [diagrams/classes-uml](./diagrams/
 ## Implementações futuras
 
 - [X] Listar os usuários;
-- [ ] Impedir que cria-se usuários com valores vazios (null);
+- [X] Impedir que cria-se usuários com valores vazios (null);
+- [ ] Impedir que tanto a Fachada quanto o TsfyUI acessem, diretamente, as classes Musica, Playlist e Usuario (aclopamento direto);
 - [ ] Implementar uma tabela CSV com informações pré-estabelecidas;
 - [ ] Criar código em Python para manipular a tabela CSV.
