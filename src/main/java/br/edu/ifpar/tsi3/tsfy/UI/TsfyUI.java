@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.edu.ifpar.tsi3.tsfy.UI;
 
 import br.edu.ifpar.tsi3.tsfy.UI.fachada.FachadaFrontend;
@@ -11,10 +7,6 @@ import br.edu.ifpar.tsi3.tsfy.dominio.Usuario;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- *
- * @author 1071759
- */
 public class TsfyUI {
 
     private final Scanner sc = new Scanner(System.in);
@@ -22,7 +14,6 @@ public class TsfyUI {
     private Usuario usuarioLogado = null;
 
     public void rodar() {
-
         int op;
 
         do {
@@ -34,12 +25,11 @@ public class TsfyUI {
                     criarNovoUsuario();
                     break;
                 case 2:
-                    autenticar();
+                    autenticarUsuario();
                     break;
                 default:
                     throw new AssertionError();
             }
-
         } while (usuarioLogado == null);
 
         do {
@@ -53,7 +43,6 @@ public class TsfyUI {
                 case 2:
                     editarMusica();
                     break;
-
                 case 3:
                     listarMusicas();
                     break;
@@ -64,13 +53,13 @@ public class TsfyUI {
                     removerMusica();
                     break;
                 case 6:
-                    registrarPlaylist();
+                    criarPlaylist();
                     break;
                 case 7:
-                    listarMusicasDeUmaPlaylist();
+                    listarMusicasPlaylist();
                     break;
                 case 8:
-                    removerMusicaDaPlaylist();
+                    removerMusicaPlaylist();
                     break;
                 case 9:
                     editarPlaylist();
@@ -82,18 +71,15 @@ public class TsfyUI {
                     removerPlaylist();
                     break;
                 case 12:
-                    adicionarMusicaAPlaylist();
+                    adicionarMusicaPlaylist();
                     break;
                 default:
                     throw new AssertionError();
             }
-
         } while (op != 0);
-
     }
 
     private void menu() {
-        // Favoritar Musica
         System.out.println("------ Menu de Operacoes ------");
         System.out.println("1 - Criar musica");
         System.out.println("2 - Editar musica");
@@ -120,7 +106,12 @@ public class TsfyUI {
         System.out.println("Qual é a duracao da musica?");
         Double duracao = Double.parseDouble(sc.nextLine());
 
-        boolean sucesso = this.fachada.registrarMusica(titulo, compositor, interprete, duracao);
+        boolean sucesso = this.fachada.registrarMusica(
+            titulo,
+            compositor,
+            interprete,
+            duracao
+        );
 
         if (sucesso) {
             System.out.println("Música Criada com sucesso!");
@@ -133,7 +124,9 @@ public class TsfyUI {
         System.out.println("Esta é meu banco de dados de músicas: ");
         fachada.listarTodasMusicas();
 
-        System.out.println("Informe qual é o ID da música que você deseja editar: ");
+        System.out.println(
+            "Informe qual é o ID da música que você deseja editar: "
+        );
         int id = Integer.parseInt(sc.nextLine());
 
         System.out.println("Qual é o título da musica?");
@@ -145,14 +138,19 @@ public class TsfyUI {
         System.out.println("Qual é a duracao da musica?");
         Double duracao = Double.parseDouble(sc.nextLine());
 
-        boolean sucesso = fachada.editarMusica(id, titulo, compositor, interprete, duracao);
+        boolean sucesso = fachada.editarMusica(
+            id,
+            titulo,
+            compositor,
+            interprete,
+            duracao
+        );
 
         if (sucesso) {
             System.out.println("Musica editada com sucesso.");
         } else {
             System.out.println("Falha ao editar a musica.");
         }
-
     }
 
     private void listarMusicas() {
@@ -160,18 +158,26 @@ public class TsfyUI {
 
         for (int i = 0; i < listaDeMusicas.size(); i++) {
             String musica = "[%d] - %s";
-            System.out.println(String.format(musica, i, listaDeMusicas.get(i).getTitulo()));
+            System.out.println(
+                String.format(musica, i, listaDeMusicas.get(i).getTitulo())
+            );
         }
-
     }
 
     private void buscarMusicaPorID() {
-        System.out.println("Informe qual é o ID da música que você deseja buscar: ");
+        System.out.println(
+            "Informe qual é o ID da música que você deseja buscar: "
+        );
         int id = Integer.parseInt(sc.nextLine());
         Musica sucesso = fachada.buscarPorId(id);
 
         if (sucesso != null) {
-            System.out.println("Musica Encontrada." + sucesso.getTitulo() + "-" + sucesso.getCompositor());
+            System.out.println(
+                "Musica Encontrada." +
+                    sucesso.getTitulo() +
+                    "-" +
+                    sucesso.getCompositor()
+            );
         } else {
             System.out.println("Falha ao buscar a musica.");
         }
@@ -181,7 +187,9 @@ public class TsfyUI {
         System.out.println("Esta é meu banco de dados de músicas: ");
         fachada.listarTodasMusicas();
 
-        System.out.println("Informe qual é o ID da música que você deseja remover: ");
+        System.out.println(
+            "Informe qual é o ID da música que você deseja remover: "
+        );
         int id = Integer.parseInt(sc.nextLine());
 
         boolean sucesso = fachada.revomerMusica(id);
@@ -194,7 +202,6 @@ public class TsfyUI {
     }
 
     private void menuDeLogin() {
-        // Favoritar Musica
         System.out.println("------ Menu de Operacoes ------");
         System.out.println("1 - Criar novo usuario");
         System.out.println("2 - Autentica");
@@ -218,13 +225,13 @@ public class TsfyUI {
         }
     }
 
-    private void autenticar() {
+    private void autenticarUsuario() {
         System.out.println("Informe seu cpf: ");
         String cpf = sc.nextLine();
         System.out.println("Informe sua senha: ");
         String senha = sc.nextLine();
 
-        usuarioLogado = fachada.autenticar(cpf, senha);
+        usuarioLogado = fachada.autenticarUsuario(cpf, senha);
 
         if (usuarioLogado != null) {
             System.out.println("Usuario Logado");
@@ -233,13 +240,13 @@ public class TsfyUI {
         }
     }
 
-    private void registrarPlaylist() {
+    private void criarPlaylist() {
         System.out.println("Informe seu nome da playlist:");
         String nome = sc.nextLine();
         System.out.println("Informe a descrição da playlist: ");
         String descricao = sc.nextLine();
 
-        boolean sucesso = fachada.registrarPlaylist(usuarioLogado, nome, descricao);
+        boolean sucesso = fachada.criarPlaylist(usuarioLogado, nome, descricao);
 
         if (sucesso) {
             System.out.println("Playlist Criada com sucesso!");
@@ -252,13 +259,18 @@ public class TsfyUI {
         ArrayList<Playlist> listaDePlaylists = fachada.listarPlaylists();
         for (int i = 0; i < listaDePlaylists.size(); i++) {
             String playlist = "[%d] - %s, %s";
-            System.out.println(String.format(playlist, i, listaDePlaylists.get(i).getNome(),
-                    listaDePlaylists.get(i).getDescricao()));
+            System.out.println(
+                String.format(
+                    playlist,
+                    i,
+                    listaDePlaylists.get(i).getNome(),
+                    listaDePlaylists.get(i).getDescricao()
+                )
+            );
         }
-
     }
 
-    private void adicionarMusicaAPlaylist() {
+    private void adicionarMusicaPlaylist() {
         System.out.println("Essas são suas playlists: ");
         listarPlaylists();
 
@@ -270,17 +282,16 @@ public class TsfyUI {
         System.out.println("Informe o id da musica: ");
         int idMusica = sc.nextInt();
 
-        boolean sucesso = fachada.adicionarMusicaAPlaylist(idPlaylist, idMusica);
+        boolean sucesso = fachada.adicionarMusicaPlaylist(idPlaylist, idMusica);
 
         if (sucesso) {
             System.out.println("Musica Adicionada com sucesso!");
         } else {
             System.out.println("Falha ao adicinar a musica!");
         }
-
     }
 
-    private void removerMusicaDaPlaylist() {
+    private void removerMusicaPlaylist() {
         System.out.println("Essas são suas playlists: ");
         listarPlaylists();
 
@@ -292,7 +303,7 @@ public class TsfyUI {
         System.out.println("Informe o id da musica que deseja remover: ");
         int idMusica = sc.nextInt();
 
-        boolean sucesso = fachada.removerMusicaDaPlaylist(idDaPlaylist, idMusica);
+        boolean sucesso = fachada.removerMusicaPlaylist(idDaPlaylist, idMusica);
 
         if (sucesso) {
             System.out.println("Musica Removida com sucesso!");
@@ -301,24 +312,32 @@ public class TsfyUI {
         }
     }
 
-    private void listarMusicasDeUmaPlaylist() {
+    private void listarMusicasPlaylist() {
         System.out.println("Essas são suas playlists: ");
         listarPlaylists();
 
-        System.out.println("Informe o id da playlist que deseja exibir as musicas: ");
+        System.out.println(
+            "Informe o id da playlist que deseja exibir as musicas: "
+        );
         int idDaPlaylist = sc.nextInt();
 
-        ArrayList<Musica> listaDeMusicasDaPlaylist = fachada.listarMusicasDeUmaPlaylist(idDaPlaylist);
+        ArrayList<Musica> listaDeMusicasDaPlaylist =
+            fachada.listarMusicasPlaylist(idDaPlaylist);
 
         if (listaDeMusicasDaPlaylist != null) {
             for (int i = 0; i < listaDeMusicasDaPlaylist.size(); i++) {
                 String musica = "[%d] - %s";
-                System.out.println(String.format(musica, i, listaDeMusicasDaPlaylist.get(i).getTitulo()));
+                System.out.println(
+                    String.format(
+                        musica,
+                        i,
+                        listaDeMusicasDaPlaylist.get(i).getTitulo()
+                    )
+                );
             }
         } else {
             System.out.println("Falha ao listar musicas da playlist");
         }
-
     }
 
     private void removerPlaylist() {

@@ -1,22 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.edu.ifpar.tsi3.tsfy.dominio;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-/**
- *
- * @author 1071759
- */
 public class Usuario {
-    
+
     private String cpf;
     private String nome;
     private String senha;
-    
+
     private ArrayList<Playlist> playlists;
 
     public ArrayList<Playlist> getPlaylists() {
@@ -25,7 +17,7 @@ public class Usuario {
 
     public void setPlaylists(ArrayList<Playlist> playlists) {
         this.playlists = playlists;
-    }  
+    }
 
     public String getCpf() {
         return cpf;
@@ -84,6 +76,4 @@ public class Usuario {
         }
         return Objects.equals(this.senha, other.senha);
     }
-    
-    
 }

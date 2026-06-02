@@ -20,11 +20,11 @@ classDiagram
         -menuDeLogin() void
         -criarNovoUsuario() void
         -autenticar() void
-        -registrarPlaylist() void
+        -criarPlaylist() void
         -listarPlaylists() void
-        -adicionarMusicaAPlaylist() void
-        -removerMusicaDaPlaylist() void
-        -listarMusicasDeUmaPlaylist() void
+        -adicionarMusicaPlaylist() void
+        -removerMusicaPlaylist() void
+        -listarMusicasPlaylist() void
         -removerPlaylist() void
         -editarPlaylist() void
     }
@@ -47,13 +47,13 @@ classDiagram
         +revomerMusica(id: int) boolean
         +registrarPlaylist(dono: Usuario, nome: String, descricao: String) boolean
         +listarPlaylists() ArrayList~Playlist~
-        +adicionarMusicaAPlaylist(idPlaylist: int, idMusica: int) boolean
-        +removerMusicaDaPlaylist(idPlaylist: int, idMusica: int) boolean
-        +listarMusicasDeUmaPlaylist(idPlaylist: int) ArrayList~Musica~
+        +adicionarMusicaPlaylist(idPlaylist: int, idMusica: int) boolean
+        +removerMusicaPlaylist(idPlaylist: int, idMusica: int) boolean
+        +listarMusicasPlaylist(idPlaylist: int) ArrayList~Musica~
         +removerPlaylist(idPlaylist: int) boolean
         +editarPlaylist(idPlaylist: int, nome: String, descricao: String) boolean
         +registrarUsuario(nome: String, cpf: String, senha: String) boolean
-        +autenticar(cpf: String, senha: String) Usuario
+        +autenticarUsuario(cpf: String, senha: String) Usuario
     }
 
     class Musica {
@@ -91,7 +91,7 @@ classDiagram
         +setDescricao(descricao: String) void
         +getMusicas() ArrayList~Musica~
         +setMusicas(musicas: ArrayList~Musica~) void
-        +adicionarAPlaylist(musica: Musica) void
+        +adicionarPlaylist(musica: Musica) void
         +hashCode() int
         +equals(obj: Object) boolean
     }
@@ -129,9 +129,9 @@ classDiagram
         +PlaylistControlador(musicaControlador: MusicaControlador)
         +registrarPlaylist(dono: Usuario, nome: String, descricao: String) boolean
         +listarPlaylists() ArrayList~Playlist~
-        +adicionarMusicaAPlaylist(idPlaylist: int, idMusica: int) boolean
-        +removerMusicaDaPlaylist(idPlaylist: int, idMusica: int) boolean
-        +listarMusicasDeUmaPlaylist(idPlaylist: int) ArrayList~Musica~
+        +adicionarMusicaPlaylist(idPlaylist: int, idMusica: int) boolean
+        +removerMusicaPlaylist(idPlaylist: int, idMusica: int) boolean
+        +listarMusicasPlaylist(idPlaylist: int) ArrayList~Musica~
         +removerPlaylist(idPlaylist: int) boolean
         +editarPlaylist(idPlaylist: int, nome: String, descricao: String) boolean
     }

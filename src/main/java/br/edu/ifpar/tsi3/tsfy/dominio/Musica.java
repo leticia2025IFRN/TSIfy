@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.edu.ifpar.tsi3.tsfy.dominio;
 
 import java.util.Objects;
 
-/**
- *
- * @author 1071759
- */
 public class Musica {
     
     private String titulo;
@@ -97,8 +89,5 @@ public class Musica {
             return false;
         }
         return Objects.equals(this.interprete, other.interprete);
-    }
-    
-    
-    
+    }   
 }

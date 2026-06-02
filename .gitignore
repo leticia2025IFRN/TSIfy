@@ -1,5 +1,6 @@
-# Metadata
+# Project Setup
 .metadata/
+.project
 
 # Compiled class file
 *.class

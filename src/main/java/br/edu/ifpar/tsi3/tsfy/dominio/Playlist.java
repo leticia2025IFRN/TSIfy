@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.edu.ifpar.tsi3.tsfy.dominio;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-/**
- *
- * @author 1071759
- */
 public class Playlist {
     
     private Usuario dono;
@@ -61,12 +53,9 @@ public class Playlist {
         this.musicas = musicas;
     }
     
-    public void adicionarAPlaylist(Musica musica){
+    public void adicionarPlaylist(Musica musica){
         this.musicas.add(musica);
     }
-    
-    
-    //TODO: e os demais métodos de manipular músicas da playlist.
 
     @Override
     public int hashCode() {

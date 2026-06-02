@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.edu.ifpar.tsi3.tsfy.UI.fachada;
 
 import br.edu.ifpar.tsi3.tsfy.controladores.MusicaControlador;
@@ -12,10 +8,6 @@ import br.edu.ifpar.tsi3.tsfy.dominio.Playlist;
 import br.edu.ifpar.tsi3.tsfy.dominio.Usuario;
 import java.util.ArrayList;
 
-/**
- *
- * @author 1071759
- */
 public class FachadaFrontend {
 
     private MusicaControlador controladorDeMusica;
@@ -24,7 +16,9 @@ public class FachadaFrontend {
 
     public FachadaFrontend() {
         this.controladorDeMusica = new MusicaControlador();
-        this.controladorDePlaylist = new PlaylistControlador(controladorDeMusica);
+        this.controladorDePlaylist = new PlaylistControlador(
+            controladorDeMusica
+        );
         this.controladorDeUsuario = new UsuarioControlador();
     }
 
@@ -40,7 +34,9 @@ public class FachadaFrontend {
         return controladorDePlaylist;
     }
 
-    public void setControladorDePlaylist(PlaylistControlador controladorDePlaylist) {
+    public void setControladorDePlaylist(
+        PlaylistControlador controladorDePlaylist
+    ) {
         this.controladorDePlaylist = controladorDePlaylist;
     }
 
@@ -48,12 +44,24 @@ public class FachadaFrontend {
         return controladorDeUsuario;
     }
 
-    public void setControladorDeUsuario(UsuarioControlador controladorDeUsuario) {
+    public void setControladorDeUsuario(
+        UsuarioControlador controladorDeUsuario
+    ) {
         this.controladorDeUsuario = controladorDeUsuario;
     }
 
-    public boolean registrarMusica(String titulo, String compositor, String interprete, Double duracao) {
-        boolean sucesso = this.controladorDeMusica.registrarMusica(titulo, compositor, interprete, duracao);
+    public boolean registrarMusica(
+        String titulo,
+        String compositor,
+        String interprete,
+        Double duracao
+    ) {
+        boolean sucesso = this.controladorDeMusica.registrarMusica(
+            titulo,
+            compositor,
+            interprete,
+            duracao
+        );
         return sucesso;
     }
 
@@ -61,8 +69,20 @@ public class FachadaFrontend {
         return this.controladorDeMusica.listarTodasMusicas();
     }
 
-    public boolean editarMusica(int id, String titulo, String compositor, String interprete, double duracao) {
-        boolean sucesso = this.controladorDeMusica.editarMusica(id, titulo, compositor, interprete, duracao);
+    public boolean editarMusica(
+        int id,
+        String titulo,
+        String compositor,
+        String interprete,
+        double duracao
+    ) {
+        boolean sucesso = this.controladorDeMusica.editarMusica(
+            id,
+            titulo,
+            compositor,
+            interprete,
+            duracao
+        );
         return sucesso;
     }
 
@@ -75,11 +95,13 @@ public class FachadaFrontend {
         boolean sucesso = this.controladorDeMusica.revomerMusica(id);
         return sucesso;
     }
-    // Fim do bloco de musicas
 
-    // Metodos de playlist
-    public boolean registrarPlaylist(Usuario dono, String nome, String descricao) {
-        boolean sucesso = this.controladorDePlaylist.registrarPlaylist(dono, nome, descricao);
+    public boolean criarPlaylist(Usuario dono, String nome, String descricao) {
+        boolean sucesso = this.controladorDePlaylist.criarPlaylist(
+            dono,
+            nome,
+            descricao
+        );
         return sucesso;
     }
 
@@ -87,41 +109,58 @@ public class FachadaFrontend {
         return this.controladorDePlaylist.listarPlaylists();
     }
 
-    public boolean adicionarMusicaAPlaylist(int idPlaylist, int idMusica) {
-        boolean sucesso = this.controladorDePlaylist.adicionarMusicaAPlaylist(idPlaylist, idMusica);
-        return sucesso;
-
-    }
-
-    public boolean removerMusicaDaPlaylist(int idPlaylist, int idMusica) {
-        boolean sucesso = this.controladorDePlaylist.removerMusicaDaPlaylist(idPlaylist, idMusica);
+    public boolean adicionarMusicaPlaylist(int idPlaylist, int idMusica) {
+        boolean sucesso = this.controladorDePlaylist.adicionarMusicaPlaylist(
+            idPlaylist,
+            idMusica
+        );
         return sucesso;
     }
 
-    public ArrayList<Musica> listarMusicasDeUmaPlaylist(int idPlaylist) {
-        ArrayList<Musica> sucesso = this.controladorDePlaylist.listarMusicasDeUmaPlaylist(idPlaylist);
+    public boolean removerMusicaPlaylist(int idPlaylist, int idMusica) {
+        boolean sucesso = this.controladorDePlaylist.removerMusicaPlaylist(
+            idPlaylist,
+            idMusica
+        );
+        return sucesso;
+    }
+
+    public ArrayList<Musica> listarMusicasPlaylist(int idPlaylist) {
+        ArrayList<Musica> sucesso =
+            this.controladorDePlaylist.listarMusicasPlaylist(idPlaylist);
         return sucesso;
     }
 
     public boolean removerPlaylist(int idPlaylist) {
-        boolean sucesso = this.controladorDePlaylist.removerPlaylist(idPlaylist);
+        boolean sucesso = this.controladorDePlaylist.removerPlaylist(
+            idPlaylist
+        );
         return sucesso;
     }
 
-    public boolean editarPlaylist(int idPlaylist, String nome, String descricao) {
-        boolean sucesso = this.controladorDePlaylist.editarPlaylist(idPlaylist, nome, descricao);
+    public boolean editarPlaylist(
+        int idPlaylist,
+        String nome,
+        String descricao
+    ) {
+        boolean sucesso = this.controladorDePlaylist.editarPlaylist(
+            idPlaylist,
+            nome,
+            descricao
+        );
         return sucesso;
     }
-    // Fim do bloco de playlist
 
-    // Metodos de usuario
     public boolean registrarUsuario(String nome, String cpf, String senha) {
-        boolean sucesso = this.controladorDeUsuario.criarUsuario(nome, cpf, senha);
+        boolean sucesso = this.controladorDeUsuario.criarUsuario(
+            nome,
+            cpf,
+            senha
+        );
         return sucesso;
     }
 
-    public Usuario autenticar(String cpf, String senha) {
+    public Usuario autenticarUsuario(String cpf, String senha) {
         return this.controladorDeUsuario.autenticarUsuario(cpf, senha);
     }
-
 }
