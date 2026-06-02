@@ -4,8 +4,11 @@ Este projeto é para a atividade da disciplina de Análise e Projetos de Sistema
 
 ## Detalhes
 
-**Data de entrega:** 01/06/2026 às 13:00.
+**Data de entrega:** 01/06/2026 às 13:00. (JÁ ENTREGUE)
+
 **Aluno(a):** Letícia Geovana Lopes dos Santos.
+
+O(s) diagrama(s) do projeto se encontra(m) em [diagrams/classes-uml](./diagrams/classes-uml.md)
 
 ## Scaffolding do Projeto
 
