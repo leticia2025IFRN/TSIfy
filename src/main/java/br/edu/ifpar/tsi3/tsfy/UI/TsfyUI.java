@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class TsfyUI {
 
     private final Scanner sc = new Scanner(System.in);
-    private FachadaFrontend fachada = new FachadaFrontend();
+    private final FachadaFrontend fachada = new FachadaFrontend();
     private Usuario usuarioLogado = null;
 
     public void rodar() {
@@ -21,19 +21,19 @@ public class TsfyUI {
             op = Integer.parseInt(sc.nextLine());
 
             switch (op) {
-                case 1:
+                case 1 ->
                     criarNovoUsuario();
-                    break;
-                case 2:
+                case 2 ->
                     autenticarUsuario();
-                    break;
-                default:
+                case 3 ->
+                    listarUsuarios();
+                default ->
                     throw new AssertionError();
             }
         } while (usuarioLogado == null);
 
         do {
-            menu();
+            menuPrincipal();
             op = Integer.parseInt(sc.nextLine());
 
             switch (op) {
@@ -79,7 +79,7 @@ public class TsfyUI {
         } while (op != 0);
     }
 
-    private void menu() {
+    private void menuPrincipal() {
         System.out.println("------ Menu de Operacoes ------");
         System.out.println("01 - Criar musica");
         System.out.println("02 - Editar musica");
@@ -96,6 +96,7 @@ public class TsfyUI {
         System.out.println("00 - Sair");
     }
 
+    // #: Bloco de Música
     private void criarMusica() {
         System.out.println("Qual é o título da musica?");
         String titulo = sc.nextLine();
@@ -107,10 +108,10 @@ public class TsfyUI {
         Double duracao = Double.parseDouble(sc.nextLine());
 
         boolean sucesso = this.fachada.registrarMusica(
-            titulo,
-            compositor,
-            interprete,
-            duracao
+                titulo,
+                compositor,
+                interprete,
+                duracao
         );
 
         if (sucesso) {
@@ -125,7 +126,7 @@ public class TsfyUI {
         fachada.listarTodasMusicas();
 
         System.out.println(
-            "Informe qual é o ID da música que você deseja editar: "
+                "Informe qual é o ID da música que você deseja editar: "
         );
         int id = Integer.parseInt(sc.nextLine());
 
@@ -139,11 +140,11 @@ public class TsfyUI {
         Double duracao = Double.parseDouble(sc.nextLine());
 
         boolean sucesso = fachada.editarMusica(
-            id,
-            titulo,
-            compositor,
-            interprete,
-            duracao
+                id,
+                titulo,
+                compositor,
+                interprete,
+                duracao
         );
 
         if (sucesso) {
@@ -159,24 +160,24 @@ public class TsfyUI {
         for (int i = 0; i < listaDeMusicas.size(); i++) {
             String musica = "[%d] - %s";
             System.out.println(
-                String.format(musica, i, listaDeMusicas.get(i).getTitulo())
+                    String.format(musica, i, listaDeMusicas.get(i).getTitulo())
             );
         }
     }
 
     private void buscarMusicaPorID() {
         System.out.println(
-            "Informe qual é o ID da música que você deseja buscar: "
+                "Informe qual é o ID da música que você deseja buscar: "
         );
         int id = Integer.parseInt(sc.nextLine());
         Musica sucesso = fachada.buscarPorId(id);
 
         if (sucesso != null) {
             System.out.println(
-                "Musica Encontrada." +
-                    sucesso.getTitulo() +
-                    "-" +
-                    sucesso.getCompositor()
+                    "Musica Encontrada."
+                    + sucesso.getTitulo()
+                    + "-"
+                    + sucesso.getCompositor()
             );
         } else {
             System.out.println("Falha ao buscar a musica.");
@@ -188,7 +189,7 @@ public class TsfyUI {
         fachada.listarTodasMusicas();
 
         System.out.println(
-            "Informe qual é o ID da música que você deseja remover: "
+                "Informe qual é o ID da música que você deseja remover: "
         );
         int id = Integer.parseInt(sc.nextLine());
 
@@ -201,10 +202,12 @@ public class TsfyUI {
         }
     }
 
+    // #: Bloco de Usuário
     private void menuDeLogin() {
         System.out.println("------ Menu de Operacoes ------");
-        System.out.println("1 - Criar novo usuario");
-        System.out.println("2 - Autentica");
+        System.out.println("1 - Criar novo Usuario");
+        System.out.println("2 - Autenticar Usuario");
+        System.out.println("3 - Listar Usuarios");
     }
 
     private void criarNovoUsuario() {
@@ -240,6 +243,31 @@ public class TsfyUI {
         }
     }
 
+    private void listarUsuarios() {
+
+        ArrayList<Usuario> listaDeUsuarios = fachada.listarUsuarios();
+
+        if (listaDeUsuarios.size() == 0) {
+            System.out.println("No momento, a lista consta vazia.");
+        } else {
+            System.out.println(
+                    "Aqui consta a lista de usuarios cadastrados na plataforma:"
+            );
+            for (int i = 0; i < listaDeUsuarios.size(); i++) {
+                String usuario = "[%d] - Nome: %s - CPF: %s";
+                System.out.println(
+                        String.format(
+                                usuario,
+                                i,
+                                listaDeUsuarios.get(i).getNome(),
+                                listaDeUsuarios.get(i).getCpf()
+                        )
+                );
+            }
+        }
+    }
+
+    // #: Bloco de Playlist
     private void criarPlaylist() {
         System.out.println("Informe seu nome da playlist:");
         String nome = sc.nextLine();
@@ -260,12 +288,12 @@ public class TsfyUI {
         for (int i = 0; i < listaDePlaylists.size(); i++) {
             String playlist = "[%d] - %s, %s";
             System.out.println(
-                String.format(
-                    playlist,
-                    i,
-                    listaDePlaylists.get(i).getNome(),
-                    listaDePlaylists.get(i).getDescricao()
-                )
+                    String.format(
+                            playlist,
+                            i,
+                            listaDePlaylists.get(i).getNome(),
+                            listaDePlaylists.get(i).getDescricao()
+                    )
             );
         }
     }
@@ -317,22 +345,22 @@ public class TsfyUI {
         listarPlaylists();
 
         System.out.println(
-            "Informe o id da playlist que deseja exibir as musicas: "
+                "Informe o id da playlist que deseja exibir as musicas: "
         );
         int idDaPlaylist = sc.nextInt();
 
-        ArrayList<Musica> listaDeMusicasDaPlaylist =
-            fachada.listarMusicasPlaylist(idDaPlaylist);
+        ArrayList<Musica> listaDeMusicasDaPlaylist
+                = fachada.listarMusicasPlaylist(idDaPlaylist);
 
         if (listaDeMusicasDaPlaylist != null) {
             for (int i = 0; i < listaDeMusicasDaPlaylist.size(); i++) {
                 String musica = "[%d] - %s";
                 System.out.println(
-                    String.format(
-                        musica,
-                        i,
-                        listaDeMusicasDaPlaylist.get(i).getTitulo()
-                    )
+                        String.format(
+                                musica,
+                                i,
+                                listaDeMusicasDaPlaylist.get(i).getTitulo()
+                        )
                 );
             }
         } else {

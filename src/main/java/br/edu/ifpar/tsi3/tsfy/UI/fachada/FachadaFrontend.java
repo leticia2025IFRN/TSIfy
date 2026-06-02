@@ -163,4 +163,12 @@ public class FachadaFrontend {
     public Usuario autenticarUsuario(String cpf, String senha) {
         return this.controladorDeUsuario.autenticarUsuario(cpf, senha);
     }
+    
+    /**
+     *
+     * @return
+     */
+    public ArrayList<Usuario> listarUsuarios() {
+        return this.controladorDeUsuario.listarUsuarios();
+    }
 }
