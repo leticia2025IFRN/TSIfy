@@ -2,7 +2,8 @@
 .settings/
 .metadata/
 .project
-src/test/*
+bin/
+src/test/
 
 # Compiled class file
 *.class
