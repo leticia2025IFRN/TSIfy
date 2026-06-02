@@ -211,7 +211,6 @@ public class TsfyUI {
     }
 
     private void criarNovoUsuario() {
-        // Não estou verificando se tenho mais do que um usuário com o mesmo cpf
         System.out.println("Informe seu nome:");
         String nome = sc.nextLine();
         System.out.println("Informe seu cpf: ");
@@ -219,12 +218,19 @@ public class TsfyUI {
         System.out.println("Informe sua senha: ");
         String senha = sc.nextLine();
 
-        boolean sucesso = fachada.registrarUsuario(nome, cpf, senha);
-
-        if (sucesso) {
-            System.out.println("Usuário Criado com sucesso!");
+        if (nome.isEmpty() || cpf.isEmpty() || senha.isEmpty()) {
+            System.out.printf(
+                    "Um dos parametros está vazio!\n"
+                    + "Crie o usuario sem valores vazios.\n"
+            );
         } else {
-            System.out.println("Usuário Ja existente!");
+            boolean sucesso = fachada.registrarUsuario(nome, cpf, senha);
+            
+            if (sucesso) {
+                System.out.println("Usuário Criado com sucesso!");
+            } else {
+                System.out.println("Usuário Ja existente!");
+            }
         }
     }
 
@@ -244,7 +250,6 @@ public class TsfyUI {
     }
 
     private void listarUsuarios() {
-
         ArrayList<Usuario> listaDeUsuarios = fachada.listarUsuarios();
 
         if (listaDeUsuarios.size() == 0) {
