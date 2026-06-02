@@ -28,6 +28,7 @@ public class PlaylistControlador {
         return true;
     }
 
+    @SuppressWarnings("unchecked")
     public ArrayList<Playlist> listarPlaylists() {
         return (ArrayList<Playlist>) listaPlaylists.clone();
     }

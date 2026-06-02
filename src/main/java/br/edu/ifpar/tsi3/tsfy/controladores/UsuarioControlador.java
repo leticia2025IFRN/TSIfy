@@ -19,6 +19,7 @@ public class UsuarioControlador {
         return true;
     }
 
+    @SuppressWarnings("unchecked")
     public ArrayList<Usuario> listarUsuarios() {
         ArrayList<Usuario> listaDeUsuariosCopia = (ArrayList<
             Usuario
