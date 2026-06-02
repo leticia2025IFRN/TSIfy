@@ -81,19 +81,19 @@ public class TsfyUI {
 
     private void menu() {
         System.out.println("------ Menu de Operacoes ------");
-        System.out.println("1 - Criar musica");
-        System.out.println("2 - Editar musica");
-        System.out.println("3 - Listar musicas");
-        System.out.println("4 - Buscar musica");
-        System.out.println("5 - Remover musica");
-        System.out.println("6 - Criar playlist");
-        System.out.println("7 - Listar Musicas de uma playlist");
-        System.out.println("8 - Remover uma musica de uma playlist");
-        System.out.println("9 - Editar playlist");
+        System.out.println("01 - Criar musica");
+        System.out.println("02 - Editar musica");
+        System.out.println("03 - Listar musicas");
+        System.out.println("04 - Buscar musica");
+        System.out.println("05 - Remover musica");
+        System.out.println("06 - Criar playlist");
+        System.out.println("07 - Listar Musicas de uma playlist");
+        System.out.println("08 - Remover uma musica de uma playlist");
+        System.out.println("09 - Editar playlist");
         System.out.println("10 - Listar Playlists");
         System.out.println("11 - Remover Playlists");
         System.out.println("12 - Adicionar musica a uma Playlist");
-        System.out.println("0 - Sair");
+        System.out.println("00 - Sair");
     }
 
     private void criarMusica() {
