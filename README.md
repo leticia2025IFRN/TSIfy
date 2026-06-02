@@ -8,7 +8,7 @@ Este projeto é para a atividade da disciplina de Análise e Projetos de Sistema
 
 **Aluno(a):** Letícia Geovana Lopes dos Santos.
 
-O(s) diagrama(s) do projeto se encontra(m) em [diagrams/classes-uml](./diagrams/classes-uml.md)
+O(s) diagrama(s) do projeto se encontra(m) em [diagrams/classes-uml](./diagrams/classes-uml.md).
 
 ## Scaffolding do Projeto
 
