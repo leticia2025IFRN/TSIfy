@@ -1,6 +1,7 @@
 # Project Setup
 .metadata/
 .project
+src/test/*
 
 # Compiled class file
 *.class
@@ -14,7 +15,7 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files #
+# Package Files
 *.jar
 *.war
 *.nar
