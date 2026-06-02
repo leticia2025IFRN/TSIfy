@@ -1,11 +1,11 @@
 # TSIfy, Tocador de Música em Java
 
-Este projeto é para a atividade de Análise e Projetos de Sistemas Web, com o objetivo de finalizar a implementação feita em sala de aula, ajustar o projeto para a utilização da Fachada e dos controladores e atualizar o diagrama de classes com todas as funcionalidades implementadas.
+Este projeto é para a atividade da disciplina de Análise e Projetos de Sistemas Web, com o objetivo de finalizar a implementação feita em sala de aula, ajustar o projeto para a utilização da fachada de Front-end e dos controladores, e atualizar o diagrama de classes com todas as funcionalidades implementadas.
 
 ## Detalhes
 
-**Data de entrega:** 01/06/2026 às 13:00
-**Aluno(a):** Letícia Geovana Lopes dos Santos
+**Data de entrega:** 01/06/2026 às 13:00.
+**Aluno(a):** Letícia Geovana Lopes dos Santos.
 
 ## Scaffolding do Projeto
 
@@ -86,3 +86,9 @@ Este projeto é para a atividade de Análise e Projetos de Sistemas Web, com o o
 
 > [!IMPORTANT]
 > - [ ] Realizar o mapeamento das depedências do projeto (se necessário).
+
+## Implementações futuras
+
+- [ ] Listar os usuários;
+- [ ] Implementar uma tabela CSV com informações prontas;
+- [ ] Criar código em Python para manipular a tabela CSV.

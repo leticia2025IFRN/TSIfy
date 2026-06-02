@@ -1,50 +1,84 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.edu.ifpar.tsi3.tsfy.controladores;
 
 import br.edu.ifpar.tsi3.tsfy.dominio.Musica;
 import br.edu.ifpar.tsi3.tsfy.dominio.Playlist;
 import br.edu.ifpar.tsi3.tsfy.dominio.Usuario;
-import br.edu.ifpar.tsi3.tsfy.servicos.PlaylistServico;
 import java.util.ArrayList;
 
-/**
- *
- * @author 1071759
- */
 public class PlaylistControlador {
 
-    private final PlaylistServico playlistServico;
+    private ArrayList<Playlist> listaPlaylists = new ArrayList<>();
+    private final MusicaControlador musicaControlador;
 
-    public PlaylistControlador(PlaylistServico playlistServico) {
+    public PlaylistControlador(MusicaControlador musicaControlador) {
         super();
-        this.playlistServico = playlistServico;
+        this.musicaControlador = musicaControlador;
     }
 
     public boolean criarPlaylist(Usuario dono, String nome, String descricao) {
-        return playlistServico.criarPlaylist(dono, nome, descricao);
+        Playlist novaPlaylist = new Playlist(dono, nome, descricao);
+
+        for (Playlist playlist : listaPlaylists) {
+            if (novaPlaylist.getNome().equals(playlist.getNome())) {
+                return false;
+            }
+        }
+
+        listaPlaylists.add(novaPlaylist);
+        return true;
     }
 
     public ArrayList<Playlist> listarPlaylists() {
-        return playlistServico.listarPlaylists();
+        return (ArrayList<Playlist>) listaPlaylists.clone();
     }
 
     public boolean adicionarMusicaPlaylist(int idPlaylist, int idMusica) {
-        return playlistServico.adicionarMusicaPlaylist(idPlaylist, idMusica);
+        ArrayList<Musica> listaDemusicas =
+            musicaControlador.listarTodasMusicas();
+
+        if (idPlaylist < 0 || idPlaylist > listaPlaylists.size() - 1) {
+            return false;
+        }
+
+        if (idMusica < 0 || idMusica > listaDemusicas.size() - 1) {
+            return false;
+        }
+
+        Playlist playlistEncontrada = listaPlaylists.get(idPlaylist);
+        Musica musicaEncontrada = listaDemusicas.get(idMusica);
+
+        playlistEncontrada.getMusicas().add(musicaEncontrada);
+        return true;
     }
 
     public boolean removerMusicaPlaylist(int idPlaylist, int idMusica) {
-        return playlistServico.removerMusicaPlaylist(idPlaylist, idMusica);
+        if (idPlaylist < 0 || idPlaylist > listaPlaylists.size() - 1) {
+            return false;
+        }
+
+        Playlist playlistEncontrada = listaPlaylists.get(idPlaylist);
+
+        playlistEncontrada.getMusicas().remove(idMusica);
+        return true;
     }
 
     public ArrayList<Musica> listarMusicasPlaylist(int idPlaylist) {
-        return playlistServico.listarMusicasPlaylist(idPlaylist);
+        if (idPlaylist < 0 || idPlaylist > listaPlaylists.size() - 1) {
+            return null;
+        }
+
+        Playlist playlistEncontrada = listaPlaylists.get(idPlaylist);
+
+        return playlistEncontrada.getMusicas();
     }
 
     public boolean removerPlaylist(int idPlaylist) {
-        return playlistServico.removerPlaylist(idPlaylist);
+        if (idPlaylist < 0 || idPlaylist > listaPlaylists.size() - 1) {
+            return false;
+        }
+
+        listaPlaylists.remove(idPlaylist);
+        return true;
     }
 
     public boolean editarPlaylist(
@@ -52,6 +86,12 @@ public class PlaylistControlador {
         String nome,
         String descricao
     ) {
-        return playlistServico.editarPlaylist(idPlaylist, nome, descricao);
+        if (idPlaylist < 0 || idPlaylist > listaPlaylists.size() - 1) {
+            return false;
+        }
+        Playlist playlistEncontrada = listaPlaylists.get(idPlaylist);
+        playlistEncontrada.setDescricao(descricao);
+        playlistEncontrada.setNome(nome);
+        return true;
     }
 }

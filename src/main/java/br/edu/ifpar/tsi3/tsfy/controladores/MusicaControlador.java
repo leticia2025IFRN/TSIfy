@@ -1,24 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.edu.ifpar.tsi3.tsfy.controladores;
 
 import br.edu.ifpar.tsi3.tsfy.dominio.Musica;
-import br.edu.ifpar.tsi3.tsfy.servicos.MusicaServico;
 import java.util.ArrayList;
 
-/**
- *
- * @author 1071759
- */
 public class MusicaControlador {
 
-    private final MusicaServico musicaServico;
-
-    public MusicaControlador(MusicaServico musicaServico) {
-        this.musicaServico = musicaServico;
-    }
+    public ArrayList<Musica> todasAsMusicas = new ArrayList<>();
 
     // Como sei que a música ja não existe?
     public boolean registrarMusica(
@@ -27,16 +14,13 @@ public class MusicaControlador {
         String interprete,
         Double duracao
     ) {
-        return musicaServico.registrarMusica(
-            titulo,
-            compositor,
-            interprete,
-            duracao
-        );
+        Musica novaMusica = new Musica(titulo, compositor, interprete, duracao);
+        this.todasAsMusicas.add(novaMusica);
+        return true;
     }
 
     public ArrayList<Musica> listarTodasMusicas() {
-        return musicaServico.listarTodasMusicas();
+        return (ArrayList<Musica>) todasAsMusicas.clone();
     }
 
     public boolean editarMusica(
@@ -46,20 +30,35 @@ public class MusicaControlador {
         String interprete,
         double duracao
     ) {
-        return musicaServico.editarMusica(
-            id,
-            titulo,
-            compositor,
-            interprete,
-            duracao
-        );
+        if (id < 0 || id > todasAsMusicas.size() - 1) {
+            return false;
+        }
+
+        Musica musicaBuscada = todasAsMusicas.get(id);
+
+        musicaBuscada.setTitulo(titulo);
+        musicaBuscada.setCompositor(compositor);
+        musicaBuscada.setInterprete(interprete);
+        musicaBuscada.setDuracao(duracao);
+
+        return true;
     }
 
     public Musica buscarPorId(int id) {
-        return musicaServico.buscarPorId(id);
+        if (id < 0 || id > todasAsMusicas.size() - 1) {
+            return null;
+        }
+
+        Musica musicaBuscada = todasAsMusicas.get(id);
+        return musicaBuscada;
     }
 
     public boolean revomerMusica(int id) {
-        return musicaServico.revomerMusica(id);
+        if (id < 0 || id > todasAsMusicas.size() - 1) {
+            return false;
+        }
+
+        todasAsMusicas.remove(id);
+        return true;
     }
 }

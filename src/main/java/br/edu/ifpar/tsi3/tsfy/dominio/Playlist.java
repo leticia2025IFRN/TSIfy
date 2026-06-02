@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.edu.ifpar.tsi3.tsfy.dominio;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-/**
- *
- * @author 1071759
- */
 public class Playlist {
 
     private Usuario dono;
@@ -61,21 +53,35 @@ public class Playlist {
         this.musicas = musicas;
     }
 
-    public void adicionarAPlaylist(Musica musica) {
+    public void adicionarPlaylist(Musica musica) {
         this.musicas.add(musica);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nome);
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.dono);
+        hash = 67 * hash + Objects.hashCode(this.nome);
+        hash = 67 * hash + Objects.hashCode(this.descricao);
+        hash = 67 * hash + Objects.hashCode(this.musicas);
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
-        Playlist other = (Playlist) obj;
-        return Objects.equals(nome, other.nome);
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Playlist other = (Playlist) obj;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        return Objects.equals(this.descricao, other.descricao);
     }
 }

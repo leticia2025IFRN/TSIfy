@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.edu.ifpar.tsi3.tsfy.UI;
 
 import br.edu.ifpar.tsi3.tsfy.UI.fachada.FachadaFrontend;
@@ -11,10 +7,6 @@ import br.edu.ifpar.tsi3.tsfy.dominio.Usuario;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- *
- * @author 1071759
- */
 public class TsfyUI {
 
     private final Scanner sc = new Scanner(System.in);
@@ -33,7 +25,7 @@ public class TsfyUI {
                     criarNovoUsuario();
                     break;
                 case 2:
-                    autenticar();
+                    autenticarUsuario();
                     break;
                 default:
                     throw new AssertionError();
@@ -87,22 +79,21 @@ public class TsfyUI {
         } while (op != 0);
     }
 
-    public void menu() {
-        //Favoritar Musica
+    private void menu() {
         System.out.println("------ Menu de Operacoes ------");
-        System.out.println("1 - Criar musica");
-        System.out.println("2 - Editar musica");
-        System.out.println("3 - Listar musicas");
-        System.out.println("4 - Buscar musica");
-        System.out.println("5 - Remover musica");
-        System.out.println("6 - Criar playlist");
-        System.out.println("7 - Listar Musicas de uma playlist");
-        System.out.println("8 - Remover uma musica de uma playlist");
-        System.out.println("9 - Editar playlist");
+        System.out.println("01 - Criar musica");
+        System.out.println("02 - Editar musica");
+        System.out.println("03 - Listar musicas");
+        System.out.println("04 - Buscar musica");
+        System.out.println("05 - Remover musica");
+        System.out.println("06 - Criar playlist");
+        System.out.println("07 - Listar Musicas de uma playlist");
+        System.out.println("08 - Remover uma musica de uma playlist");
+        System.out.println("09 - Editar playlist");
         System.out.println("10 - Listar Playlists");
         System.out.println("11 - Remover Playlists");
         System.out.println("12 - Adicionar musica a uma Playlist");
-        System.out.println("0 - Sair");
+        System.out.println("00 - Sair");
     }
 
     private void criarMusica() {
@@ -123,9 +114,7 @@ public class TsfyUI {
         );
 
         if (sucesso) {
-            System.out.println(
-                "Música adicionado com sucesso à base de dados."
-            );
+            System.out.println("Música Criada com sucesso!");
         } else {
             System.out.println("Música já existente!");
         }
@@ -212,7 +201,46 @@ public class TsfyUI {
         }
     }
 
-    private boolean criarPlaylist() {
+    private void menuDeLogin() {
+        System.out.println("------ Menu de Operacoes ------");
+        System.out.println("1 - Criar novo usuario");
+        System.out.println("2 - Autentica");
+    }
+
+    private void criarNovoUsuario() {
+        // Não estou verificando se tenho mais do que um usuário com o mesmo cpf
+        System.out.println("Informe seu nome:");
+        String nome = sc.nextLine();
+        System.out.println("Informe seu cpf: ");
+        String cpf = sc.nextLine();
+        System.out.println("Informe sua senha: ");
+        String senha = sc.nextLine();
+
+        boolean sucesso = fachada.registrarUsuario(nome, cpf, senha);
+
+        if (sucesso) {
+            System.out.println("Usuário Criado com sucesso!");
+        } else {
+            System.out.println("Usuário Ja existente!");
+        }
+    }
+
+    private void autenticarUsuario() {
+        System.out.println("Informe seu cpf: ");
+        String cpf = sc.nextLine();
+        System.out.println("Informe sua senha: ");
+        String senha = sc.nextLine();
+
+        usuarioLogado = fachada.autenticarUsuario(cpf, senha);
+
+        if (usuarioLogado != null) {
+            System.out.println("Usuario Logado");
+        } else {
+            System.out.println("Falha ao logar");
+        }
+    }
+
+    private void criarPlaylist() {
         System.out.println("Informe seu nome da playlist:");
         String nome = sc.nextLine();
         System.out.println("Informe a descrição da playlist: ");
@@ -293,18 +321,17 @@ public class TsfyUI {
         );
         int idDaPlaylist = sc.nextInt();
 
-        ArrayList<Musica> listaMusicasPlaylist = fachada.listarMusicasPlaylist(
-            idDaPlaylist
-        );
+        ArrayList<Musica> listaDeMusicasDaPlaylist =
+            fachada.listarMusicasPlaylist(idDaPlaylist);
 
-        if (listaMusicasPlaylist != null) {
-            for (int i = 0; i < listaMusicasPlaylist.size(); i++) {
+        if (listaDeMusicasDaPlaylist != null) {
+            for (int i = 0; i < listaDeMusicasDaPlaylist.size(); i++) {
                 String musica = "[%d] - %s";
                 System.out.println(
                     String.format(
                         musica,
                         i,
-                        listaMusicasPlaylist.get(i).getTitulo()
+                        listaDeMusicasDaPlaylist.get(i).getTitulo()
                     )
                 );
             }
@@ -349,39 +376,4 @@ public class TsfyUI {
             System.out.println("Falha ao atualizar laylist");
         }
     }
-
-    // TODO: realizar a implementação do Login
-    // private void menuDeLogin() {
-    //     throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    // }
-
-    // private void criarNovoUsuario() {
-    //     // Não estou verificando se tenho mais do que um usuário com o mesmo cpf
-    //     System.out.println("Informe seu nome:");
-    //     String nome = sc.nextLine();
-    //     System.out.println("Informe seu cpf: ");
-    //     String cpf = sc.nextLine();
-    //     System.out.println("Informe sua senha: ");
-    //     String senha = sc.nextLine();
-
-    //     Usuario novo = new Usuario(cpf, nome, senha);
-    //     this.todosOsPerfis.add(novo);
-    // }
-
-    // private Usuario autenticar() {
-    //     System.out.println("Informe seu cpf: ");
-    //     String cpf = sc.nextLine();
-    //     System.out.println("Informe sua senha: ");
-    //     String senha = sc.nextLine();
-
-    //     for (int i = 0; i < this.todosOsPerfis.size(); i++) {
-    //         if (
-    //             this.todosOsPerfis.get(i).getCpf().equals(cpf) &&
-    //             this.todosOsPerfis.get(i).getSenha().equals(senha)
-    //         ) {
-    //             return this.todosOsPerfis.get(i);
-    //         }
-    //     }
-    //     return null;
-    // }
 }

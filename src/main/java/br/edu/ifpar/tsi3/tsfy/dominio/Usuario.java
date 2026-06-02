@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.edu.ifpar.tsi3.tsfy.dominio;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-/**
- *
- * @author 1071759
- */
 public class Usuario {
 
     private String cpf;
@@ -59,17 +51,29 @@ public class Usuario {
 
     @Override
     public int hashCode() {
-        return Objects.hash(cpf, senha);
+        int hash = 3;
+        hash = 23 * hash + Objects.hashCode(this.cpf);
+        hash = 23 * hash + Objects.hashCode(this.nome);
+        hash = 23 * hash + Objects.hashCode(this.senha);
+        hash = 23 * hash + Objects.hashCode(this.playlists);
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
-        Usuario other = (Usuario) obj;
-        return (
-            Objects.equals(cpf, other.cpf) && Objects.equals(senha, other.senha)
-        );
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (!Objects.equals(this.cpf, other.cpf)) {
+            return false;
+        }
+        return Objects.equals(this.senha, other.senha);
     }
 }

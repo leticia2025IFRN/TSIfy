@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.edu.ifpar.tsi3.tsfy.dominio;
 
 import java.util.Objects;
 
-/**
- *
- * @author 1071759
- */
 public class Musica {
 
     private String titulo;
@@ -72,21 +64,41 @@ public class Musica {
 
     @Override
     public int hashCode() {
-        return Objects.hash(compositor, duracao, interprete, titulo);
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.titulo);
+        hash = 41 * hash + Objects.hashCode(this.compositor);
+        hash = 41 * hash + Objects.hashCode(this.interprete);
+        hash =
+            41 * hash +
+            (int) (Double.doubleToLongBits(this.duracao) ^
+                (Double.doubleToLongBits(this.duracao) >>> 32));
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
-        Musica other = (Musica) obj;
-        return (
-            Objects.equals(compositor, other.compositor) &&
-            Double.doubleToLongBits(duracao) ==
-                Double.doubleToLongBits(other.duracao) &&
-            Objects.equals(interprete, other.interprete) &&
-            Objects.equals(titulo, other.titulo)
-        );
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Musica other = (Musica) obj;
+        if (
+            Double.doubleToLongBits(this.duracao) !=
+            Double.doubleToLongBits(other.duracao)
+        ) {
+            return false;
+        }
+        if (!Objects.equals(this.titulo, other.titulo)) {
+            return false;
+        }
+        if (!Objects.equals(this.compositor, other.compositor)) {
+            return false;
+        }
+        return Objects.equals(this.interprete, other.interprete);
     }
 }
