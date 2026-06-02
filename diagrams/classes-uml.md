@@ -19,7 +19,8 @@ classDiagram
         -removerMusica() void
         -menuDeLogin() void
         -criarNovoUsuario() void
-        -autenticar() void
+        -autenticarUsuario() void
+        -listarUsuarios() void
         -criarPlaylist() void
         -listarPlaylists() void
         -adicionarMusicaPlaylist() void
@@ -54,6 +55,7 @@ classDiagram
         +editarPlaylist(idPlaylist: int, nome: String, descricao: String) boolean
         +registrarUsuario(nome: String, cpf: String, senha: String) boolean
         +autenticarUsuario(cpf: String, senha: String) Usuario
+        +listarUsuario() ArrayList~Usuario~
     }
 
     class Musica {
