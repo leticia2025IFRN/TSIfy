@@ -4,7 +4,7 @@ Este projeto é para a atividade da disciplina de Análise e Projetos de Sistema
 
 ## Detalhes
 
-**Data de entrega:** 01/06/2026 às 13:00. (JÁ ENTREGUE)
+**Data de entrega:** 02/06/2026 às 23:59.
 
 **Aluno(a):** Letícia Geovana Lopes dos Santos.
 
@@ -93,5 +93,6 @@ O(s) diagrama(s) do projeto se encontra(m) em [diagrams/classes-uml](./diagrams/
 ## Implementações futuras
 
 - [X] Listar os usuários;
+- [ ] Impedir que cria-se usuários com valores vazios (null);
 - [ ] Implementar uma tabela CSV com informações pré-estabelecidas;
 - [ ] Criar código em Python para manipular a tabela CSV.
