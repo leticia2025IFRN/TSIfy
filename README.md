@@ -82,3 +82,9 @@ Este projeto é para a atividade da disciplina de Análise e Projetos de Sistema
 
 > [!IMPORTANT]
 > - [ ] Realizar o mapeamento das depedências do projeto (se necessário).
+
+## Implementações futuras
+
+- [ ] Listar os usuários;
+- [ ] Implementar uma tabela CSV com informações prontas;
+- [ ] Criar código em Python para manipular a tabela CSV.
